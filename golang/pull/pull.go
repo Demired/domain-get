@@ -4,6 +4,7 @@ import (
 	"errors"
 	"fmt"
 	"io"
+	"io/ioutil"
 	"net/http"
 	"os"
 	"time"
@@ -22,10 +23,10 @@ func Pull(token, version, date, path string) error {
 	}
 	defer res.Body.Close()
 	if res.StatusCode != 200 {
-		return errors.New("asd")
-		// return errors.New(res.Body)
+		s, _ := ioutil.ReadAll(res.Body)
+		return errors.New(string(s))
 	}
-	file, err := os.Create(fmt.Sprintf("%s/%s.txt", path, time.Now().Format("20060102")))
+	file, err := os.Create(fmt.Sprintf("%s/%s_%s.txt", path, version, time.Now().Format("20060102")))
 	if err != nil {
 		return err
 	}
