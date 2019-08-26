@@ -1,9 +1,10 @@
 package main
 
 import (
-	domain "domain-get/golang/pull"
 	"fmt"
 	"time"
+
+	domain "github.com/Demired/domain-get/golang/pull"
 )
 
 var (
